@@ -1,13 +1,20 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image} from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import MapComponent from '../Component/Mapa';
 
 const Details = ({ navigation})=> {
     const route=  useRoute();
     
     return (
         <View style={styles.container}>
-            <Image source={require('../../../assets/imagens/de-volta.png')} style={styles.icon}/>
+            <TouchableOpacity style={styles.buttonVoltar} onPress={() => navigation.goBack()}>
+                <Image
+                    source={require('../../../assets/imagens/de-volta.png')}
+                    style={styles.icon}
+                />
+            </TouchableOpacity>
+        
             <View style={styles.containerCard}>
             <View style={styles.card}>
                 <Image source={require('../../../assets/imagens/placeholder.png')} style={styles.image}></Image>
@@ -22,6 +29,14 @@ const Details = ({ navigation})=> {
 
             <Text style={styles.textTitle}>{route.params.titulo}</Text>
             <Text style={styles.textSubTitle}>{route.params.description}</Text>
+           
+            <View style= {{width: 340, height: 300, marginTop: 30}}>
+                <MapComponent latitude={route.params.latitudeMap} longitude={route.params.longitudeMap}/>
+            </View>
+
+            <View style={styles.button}>
+                <Text style={styles.buttonText}>Como Chegar</Text>
+            </View>
            
         </View>
         
@@ -63,8 +78,8 @@ const styles = StyleSheet.create({
       marginEnd: 30
     },
     cardText: {
-      fontSize: 18, // Tamanho do texto
-      color: 'black', // Cor do texto
+      fontSize: 18, 
+      color: 'black',
     },
     image: {
         width: 142,
@@ -74,7 +89,13 @@ const styles = StyleSheet.create({
         width:80,
         height:120
     },
+    buttonVoltar: {
+        padding: 0,
+        backgroundColor: 'transparent', 
+    },
     icon: {
+        width: 24,
+        height: 24,
         marginBottom: 15
     },
     textTitle:{
@@ -84,7 +105,22 @@ const styles = StyleSheet.create({
     },
     textSubTitle:{
         marginTop:20,
-    }
+    },
+    button: {
+        marginTop: 30,
+        width:330,
+        backgroundColor: 'black',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
   });
   
 export default Details;

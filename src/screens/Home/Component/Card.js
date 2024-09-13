@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Card = ({ title, description, imageUrl, iconPath }) => {
+const Card = ({ title, description, imageUrl, iconPath, detailTitle, detailDescription, latitude, longitude}) => {
   const navigation = useNavigation()
   return (
     <TouchableOpacity 
     style={styles.card}
-    onPress={() => navigation.navigate("Details", { titulo: 'Exposição Vila do Chaves', description:"avaliação de exemplo, com notas altas feitas pelos usuários" })}
+    onPress={() => navigation.navigate("Details", { titulo: detailTitle, description: detailDescription, latitudeMap: latitude, longitudeMap: longitude })}
     > 
       {imageUrl && <Image source={{ uri: imageUrl }} style={styles.image} />}
       <View style={styles.content}>
